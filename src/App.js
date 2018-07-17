@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <strong className='BulletStyle'>Ws-UI</strong>
+        <h4 className='BulletStyle'>Ws-UI</h4>
         <Home/>
       </div>
     );

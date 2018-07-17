@@ -1,11 +1,5 @@
 import React from 'react';
 import TableRow from './TableRow';
-const tableStyle = {
-    border: '1px solid grey',
-    borderCollapse: 'collapse',
-    padding: '5px'
-}
-
 
 
 class Table extends React.Component {
@@ -18,7 +12,7 @@ class Table extends React.Component {
 
     }
 
-   
+
     componentWillReceiveProps(newProps) {
         console.log("[Table.js ]", newProps);
         this.processTableRow(newProps);
@@ -45,11 +39,11 @@ class Table extends React.Component {
 
 
         return (<div >
-            <table style={tableStyle}>
+            <table className='projects' >
                 <thead>
                     <tr>
-                        <th style={tableStyle}>Project</th>
-                        <th style={tableStyle}>Service Type</th>
+                        <th >Project</th>
+                        <th >Service Type</th>
                     </tr>
                 </thead>
                 <tbody>

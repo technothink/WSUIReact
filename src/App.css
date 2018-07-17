@@ -1,7 +1,8 @@
 .App {
  
   font-family: 'Roboto', sans-serif;
-  
+  font-size: 13px;
+
 }
 
 .App-logo {
@@ -43,6 +44,31 @@
 }
 
 .BulletStyle{
-  padding:10px;
-  margin: 5px;  
+  padding-top: 0px;
+  padding-bottom: 5px;
+  
+
+}
+
+.projects {
+  
+  border-collapse: collapse;
+  
+}
+
+.projects td, .projects th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.projects tr:nth-child(even){background-color: #f2f2f2;}
+
+.projects tr:hover {background-color: #ddd;}
+
+.projects th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
 }

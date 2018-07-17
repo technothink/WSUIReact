@@ -12,7 +12,8 @@ const input = props => (
         value={props.value}
         onChange={event => props.Changed(event)}
         onKeyPress={props.entered}
-      />
+        restrict="/^[a-zA-Z]*$/"  
+    />
     </label>
   </div>
 );

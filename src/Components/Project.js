@@ -6,7 +6,7 @@ import Table from './Table';
 import Rest from './Rest'
 
 const style = {
-    width: '20%'
+    
 }
 
 class Project extends React.Component {
@@ -143,7 +143,7 @@ class Project extends React.Component {
 
                 <div>
 
-                    <strong className='BulletStyle'>Projects</strong>
+                    <h4 className='BulletStyle'>Projects</h4>
                     <Table projectData={this.state.projectData} />
 
                 </div>
