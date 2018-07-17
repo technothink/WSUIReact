@@ -15,14 +15,20 @@ class Project extends React.Component {
         super(props);
         this.state = {
             enableWsdl: true,
-            projectData: null
+            projectData: null,
+            selectedFile: null,
+            projectName: null,
+            endPoint: null,
+            serviceType: 'soap',
+            wsdlFileName: null
         }
     }
 
     serviceHandler = (event) => {
         let isSoapEnabld = true;
+        let serviceType = event.target.value;
         console.log(event.target.value);
-        if (event.target.value == 'rest') {
+        if (serviceType == 'rest') {
             isSoapEnabld = false;
         } else {
             isSoapEnabld = true;
@@ -30,7 +36,8 @@ class Project extends React.Component {
 
 
         this.setState({
-            enableWsdl: isSoapEnabld
+            enableWsdl: isSoapEnabld,
+            serviceType: serviceType
         });
     }
 
@@ -59,22 +66,65 @@ class Project extends React.Component {
 
     saveProjectHandler = () => {
         let url = "saveProject";
-        //let project = { "projectName": "vikas", "endPoint": "https://dog.ceo/api/breeds/image/random", "serviceType": "rest", "wsdl": "cust.wsdl" };
+
+        let projectName = this.state.projectName;
+        let endPoint = this.state.endPoint;
+        let serviceType = this.state.serviceType;
+        let wsdlFileName = this.state.wsdlFileName;
+
+
         Rest.post(url, {
-            projectName: "vikas",
-            endPoint: "https://dog.ceo/api/breeds/image/random",
-            serviceType: "rest",
-            wsdl: "cust.wsdl"
+            projectName: projectName,
+            endPoint: endPoint,
+            serviceType: serviceType,
+            wsdl: wsdlFileName
         }).then(
             response => {
                 console.log(response);
+                this.reloadProjectHandler();
             }
         );
+
+    }
+
+    reloadProjectHandler = () => {
+        this.getProjectDataHandler();
+    }
+
+    fileSelectedHandler = (event) => {
+        this.uploadHandler(event.target.files[0]);
+    }
+
+    uploadHandler = (file) => {
+
+        let fileName = file.name;
+        this.setState(
+            { wsdlFileName: fileName }
+        );
+
+        console.log(fileName);
+
+        let url = "uploadFile";
+        let formData = new FormData()
+        formData.append('file', file);
+
+
+        Rest.post(url, formData).then(response => {
+            console.log(response);
+        });
+
+    }
+
+    handleInput = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+        // console.log('event.target.value', event.target.value)
     }
 
     render() {
 
-        let wsdl = <File label='Select WSDL' />;
+        let wsdl = <File label='Select WSDL' Changed={this.fileSelectedHandler} />;
 
 
         return (
@@ -82,16 +132,13 @@ class Project extends React.Component {
             <div>
                 <div style={style}>
 
-                    <Input type="text" label='Project Name' />
-                    <Input type="text" label='End Point' />
+                    <Input type="text" label='Project Name' name='projectName' Changed={this.handleInput} />
+                    <Input type="text" label='End Point' name='endPoint' Changed={this.handleInput} />
                     <Select label='Service Type' changed={this.serviceHandler} />
                     {this.state.enableWsdl ? wsdl : null}
 
                     <button className="ButtonStyle" onClick={this.saveProjectHandler}>
                         Save </button>
-
-
-
                 </div>
 
                 <div>
