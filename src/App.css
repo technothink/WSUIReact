@@ -53,7 +53,7 @@
 .projects {
   
   border-collapse: collapse;
-  
+  width: 100%;
 }
 
 .projects td, .projects th {

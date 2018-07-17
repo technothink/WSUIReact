@@ -7,8 +7,8 @@ const style={
 }
 
 const TextArea = (props) => (
-    <div style={style}>
-        <input type="textarea" />
+    <div >
+        <input type="textarea" style={style} />
     </div>
 );
 
